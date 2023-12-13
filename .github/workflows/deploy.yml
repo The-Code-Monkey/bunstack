@@ -46,6 +46,7 @@ jobs:
 
       - name: Install deps
         run: bun install
+        working-directory: ./packages/hook-form-react
 
 #      - name: Lint
 #        run: bun lint
@@ -56,18 +57,22 @@ jobs:
 
       - name: Size
         run: bun size
+        working-directory: ./packages/hook-form-react
 
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        working-directory: ./packages/hook-form-react
 
       - run: echo //registry.npmjs.org/:_authToken=${{ secrets.npm_tokem }} > .npmrc
+        working-directory: ./packages/hook-form-react
 
       - name: Authenticate with Registry
         run: |
           echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+        working-directory: ./packages/hook-form-react
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - id: release
@@ -77,17 +82,21 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./packages/hook-form-react
 
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
+        with:
+          path: ./packages/hook-form-react
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           commit: "main"
-          tag: "${{ steps.package-version.outputs.current-version }}"
+          tag: "hook-form-react - ${{ steps.package-version.outputs.current-version }}"
           generateReleaseNotes: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
+
 
       - run: git push
