@@ -63,18 +63,16 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        working-directory: ./packages/hook-form-react
 
       - run: echo //registry.npmjs.org/:_authToken=${{ secrets.npm_tokem }} > .npmrc
-        working-directory: ./packages/hook-form-react
 
       - name: Authenticate with Registry
         run: |
           echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-        working-directory: ./packages/hook-form-react
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - id: release
         name: Release
         run: bun run release
