@@ -17,11 +17,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-
       - uses: dorny/paths-filter@v2
         id: hook-form-react
         with:
