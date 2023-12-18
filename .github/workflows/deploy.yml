@@ -22,7 +22,8 @@ jobs:
         with:
           filters: |
             src:
-              - 'src/**'
+              - './packages/hook-form-react/src/**'
+              - './packages/hook-form-react/package.json'
               - './package.json'
               - './bun.lockb'
               - './.github/workflows/deploy.yml'
