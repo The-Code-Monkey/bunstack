@@ -2,7 +2,7 @@ name: CI
 on: [push]
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-22.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -28,3 +28,4 @@ jobs:
 
       - name: Size
         run: bun size
+        working-directory: ./packages/hook-form-react
