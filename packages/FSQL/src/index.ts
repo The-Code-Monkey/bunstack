@@ -7,13 +7,15 @@ class DB {
   public database: string;
   public table: string;
 
-  constructor(database: string, folder?: string = '.') {
+  constructor(database: string, folder: string = '.') {
     this.database = database;
     this.folder = folder;
+
+    this.migrate();
   }
 
   private async migrate() {
-    const migrationsDir = `${process.cwd()}/${process.env.migrations ?? "migrations"}`;
+    // const migrationsDir = `${process.cwd()}/${process.env.migrations ?? "migrations"}`;
 
     const lastMigration = await this.read("migrations").orderBy("date", "DESC").columns("name").limit(1).get();
 
