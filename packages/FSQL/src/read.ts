@@ -21,7 +21,8 @@ class read {
     return this;
   }
 
-  public async function get() {
+  // @TODO: make this a promise 
+  public function get(): any {
     return {};
   }
 }
