@@ -12,7 +12,7 @@ class DB {
     this.folder = folder;
   }
 
-  private async function migrate() {
+  private async migrate() {
     const migrationsDir = `${process.cwd()}/${process.env.migrations ?? "migrations"}`;
 
     const lastMigration = await this.read("migrations").orderBy("date", "DESC").columns("name").limit(1).get();
@@ -34,22 +34,22 @@ class DB {
     }
   }
 
-  private function setTable(table: string) {
+  private setTable(table: string) {
     this.table = table;
   }
 
-  private async function createTable(table: string, schema: object) {
-    setTable(table);
+  private createTable(table: string, schema: object): typeof createTableFn {
+    this.setTable(table);
     return createTableFn(this, schema);
   }
 
-  public function read<Data>(table: string): typeof readFn {
-    setTable(table);
+  public read<Data>(table: string): typeof readFn {
+    this.setTable(table);
     return readFn(this);
   }
 
-  public async function create<Data>(table: string, data: Data | Data[]): Promise<Data[] | string> {
-    setTable(table);
+  public create<Data>(table: string, data: Data | Data[]): typeof createFn {
+    this.setTable(table);
     return createFn(this);
   }
 }
