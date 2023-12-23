@@ -43,7 +43,7 @@ class DB {
     return createTableFn(this, schema);
   }
 
-  public async function read<Data>(table: string): Promise<Data[] | string> {
+  public function read<Data>(table: string): typeof readFn {
     setTable(table);
     return readFn(this);
   }
