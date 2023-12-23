@@ -12,7 +12,8 @@ class createTable {
   }
 
   public async create() {
-    return true;
+    const file = Bun.file(`${process.cwd()}/${this.folder}/${this.database}/${this.table}/schema.json`, { type: "application/json" });
+    return await Bun.writr(file, schema);
   }
 }
 
