@@ -47,7 +47,7 @@ class DB {
 
   public read<Data>(table: string): any {
     this.setTable(table);
-    return readFn(this);
+    return new readFn(this);
   }
 
   public create<Data>(table: string, data: Data | Data[]): any {
