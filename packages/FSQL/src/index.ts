@@ -25,7 +25,7 @@ class DB {
             lnth: 255,
             unique: true,
           }
-        })
+        }).create();
       }
     }
   }
