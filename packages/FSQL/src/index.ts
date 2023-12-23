@@ -42,17 +42,17 @@ class DB {
 
   private createTable(table: string, schema: object): any {
     this.setTable(table);
-    return new createTableFn(this, schema);
+    return createTableFn(this, schema);
   }
 
   public read<Data>(table: string): any {
     this.setTable(table);
-    return new readFn(this);
+    return readFn(this);
   }
 
   public create<Data>(table: string, data: Data | Data[]): any {
     this.setTable(table);
-    return new createFn(this);
+    return createFn(this);
   }
 }
 
