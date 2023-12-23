@@ -1,3 +1,5 @@
+const { write, file } = Bun;
+
 class createTable {
   public table: string;
   public folder: string;
@@ -12,8 +14,8 @@ class createTable {
   }
 
   public async create() {
-    const file = Bun.file(`${process.cwd()}/${this.folder}/${this.database}/${this.table}/schema.json`, { type: "application/json" });
-    return await Bun.writr(file, schema);
+    const output = file(`${process.cwd()}/${this.folder}/${this.database}/${this.table}/schema.json`, { type: "application/json" });
+    return await writr(output, schema);
   }
 }
 
