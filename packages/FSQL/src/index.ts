@@ -40,19 +40,19 @@ class DB {
     this.table = table;
   }
 
-  private createTable(table: string, schema: object): typeof createTableFn {
+  private createTable(table: string, schema: object): any {
     this.setTable(table);
-    return createTableFn(this, schema);
+    return new createTableFn(this, schema);
   }
 
-  public read<Data>(table: string): typeof readFn {
+  public read<Data>(table: string): any {
     this.setTable(table);
-    return readFn(this);
+    return new readFn(this);
   }
 
-  public create<Data>(table: string, data: Data | Data[]): typeof createFn {
+  public create<Data>(table: string, data: Data | Data[]): any {
     this.setTable(table);
-    return createFn(this);
+    return new createFn(this);
   }
 }
 
