@@ -18,14 +18,18 @@ class DB {
     const lastMigration = await this.read("migrations").orderBy("date", "DESC").columns("name").limit(1).get();
 
     if (typeof lastMigration === "string") {
-      if (lastMigration.includes("does not exist")) {
-        await this.createTable("migrations", {
+      if (lastMigration.includes("table does not exist")) {
+        const result = await this.createTable("migrations", {
           name: {
             type: "string",
             lnth: 255,
             unique: true,
           }
         }).create();
+
+        if (result === true) {
+          this.migrate();
+        }
       }
     }
   }
