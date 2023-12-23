@@ -9,20 +9,20 @@ class read {
     this.database = _this.database;
   }
 
-  public function orderBy(column: string, order: 'ASC' | 'DESC') {
+  public orderBy(column: string, order: 'ASC' | 'DESC') {
     return this;
   }
 
-  public function columns(...args: string[]) {
+  public columns(...args: string[]) {
     return this;
   }
 
-  public function limit(number: number) {
+  public limit(number: number) {
     return this;
   }
 
   // @TODO: make this a promise 
-  public function get(): any {
+  public get(): any {
     return {};
   }
 }
