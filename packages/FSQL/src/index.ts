@@ -42,7 +42,7 @@ class DB {
 
   private createTable(table: string, schema: object): any {
     this.setTable(table);
-    return createTableFn(this, schema);
+    return new createTableFn(this, schema);
   }
 
   public read<Data>(table: string): any {
