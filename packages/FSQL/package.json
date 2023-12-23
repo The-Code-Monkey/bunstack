@@ -18,6 +18,9 @@
     "release": "yarn version --patch && yarn publish --non-interactive"
   },
   "license": "MIT",
+  "dependencies": {
+    "uuid": "9.0.1"
+  },
   "devDependencies": {
     "@size-limit/preset-big-lib": "11.0.1",
     "bun-plugin-dts": "0.2.1",
