@@ -1,0 +1,54 @@
+{
+  "name": "@bunstack/fsql",
+  "author": "The-Code-Monkey",
+  "description": "a file based sql style database",
+  "version": "0.0.0",
+  "homepage": "https://github.com/The-Code-Monkey/hook-form-react",
+  "bugs": {
+    "url": "https://github.com/The-Code-Monkey/hook-form-react/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/The-Code-Monkey/hook-form-react.git"
+  },
+  "scripts": {
+    "build": "rm -rf dist && mkdir dist && bun run build.ts",
+    "prepare": "bun run build",
+    "size": "size-limit",
+    "release": "yarn version --patch && yarn publish --non-interactive"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@size-limit/preset-big-lib": "11.0.1",
+    "bun-plugin-dts": "0.2.1",
+    "bun-types": "1.0.19",
+    "size-limit": "11.0.1"
+  },
+  "type": "module",
+  "main": "./dist/esm/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    "import": {
+      "types": "./dist/esm/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "require": {
+      "types": "./dist/esm/index.d.ts",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "types": "dist/esm/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "size-limit": [
+    {
+      "path": "dist/esm/index.js",
+      "limit": "50 KB"
+    }
+  ]
+}
