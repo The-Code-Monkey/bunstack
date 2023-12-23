@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
 type createPropsDefault = {
-  [x: string]: string | number | boolean;
+  [x: string]: any;
 }
 
 export interface createPropsSingle extends createPropsDefault {
