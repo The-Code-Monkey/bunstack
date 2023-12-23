@@ -11,7 +11,7 @@ class createTable {
     this.schema = schema;
   }
 
-  public async function create() {
+  public async create() {
     return true;
   }
 }
