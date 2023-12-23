@@ -40,7 +40,9 @@ const useField = <DataType extends DataTypeSingle>({
   const [value, setValue] = useState<DataType>((getFieldValue(name) ?? '') as DataType);
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    // @ts-expect-error bun types wrong
     setValue(e.target.value as DataType);
+    // @ts-expect-error bun types wrong
     updateField(name, e.target.value);
   };
 
