@@ -14,8 +14,7 @@ class createTable {
   }
 
   public async create() {
-    const output = file(`./${this.folder}/${this.database}/${this.table}/schema.json`, { type: "application/json" });
-    return await write(output, this.schema);
+    return await write(`./${this.folder}/${this.database}/${this.table}/schema.json`, this.schema);
   }
 }
 
