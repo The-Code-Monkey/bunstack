@@ -7,11 +7,9 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: ./packages/hook-form-react
     outputs:
       hook-form-react: ${{ steps.hook-form-react.outputs.src }}
+      fsql: ${{ steps.fsql.outputs.src }}
     steps:
       - uses: actions/checkout@v4
         with:
