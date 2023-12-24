@@ -31,6 +31,7 @@ jobs:
           filters: |
             src:
               - './packages/FSQL/src/**'
+              - './packages/FSQL/migrations/**'
               - './packages/FSQL/package.json'
               - './package.json'
               - './bun.lockb'
