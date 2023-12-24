@@ -61,7 +61,7 @@ jobs:
 #        run: bun lint
 
       - name: Test
-        run: bun run test
+        run: bun --bun test
 
       - name: Size
         run: bun size
