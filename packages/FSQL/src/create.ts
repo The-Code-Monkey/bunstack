@@ -1,19 +1,18 @@
-import { fullGC } from 'bun:jsc';
-import { readdir } from 'node:fs/promises';
 import { v4 as uuid } from 'uuid';
 
 type createPropsDefault = {
-  [x: string]: any;
+  [x in string]: any;
 }
 
 export interface createPropsSingle extends createPropsDefault {
   _id?: string;
+  data?: never;
 }
 
-export interface createPropsMulti<Data> extends createPropsDefault {
+export interface createPropsMulti<Data> {
   data: Array<{
     _id?: string;
-  } & Data>;
+  } & Data & createPropsDefault>;
 }
 
 class create<Data> {
@@ -46,7 +45,7 @@ class create<Data> {
       delete props._id;
     }
 
-    (props as createPropsSingle).id = _id;
+    (props as createPropsDefault).id = _id;
 
     const invalidColumns = Object.keys(props).some((column) => !schemaKeys.includes(column));
 
@@ -101,7 +100,7 @@ class create<Data> {
         delete entry._id;
       }
 
-      (entry as createPropsSingle).id = _id;
+      (entry as createPropsDefault).id = _id;
 
       const path = `${this.folder}/${this.database}/${this.table}/${_id}.json`;
 

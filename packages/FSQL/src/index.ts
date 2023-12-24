@@ -5,7 +5,7 @@ import { default as readFn } from './read';
 import { default as createTableFn } from './createTable';
 
 type MigrationType = {
-  name: string;
+  id?: string;
   date: Date;
 };
 
@@ -80,7 +80,7 @@ class DB {
             // add row to migrations table with migration name
             await this.create<MigrationType>("migrations").create({
               _id: migrationName,
-              date: new Date(),
+              date: new Date()
             });
 
             await this.createTable(tableName, migrationData).create();
