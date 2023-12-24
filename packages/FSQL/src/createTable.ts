@@ -12,7 +12,7 @@ class createTable {
   }
 
   public async create() {
-    return await Bun.write(`./${this.folder}/${this.database}/${this.table}/schema.json`, this.schema);
+    return await Bun.write(`./${this.folder}/${this.database}/${this.table}/schema.json`, JSON.stringify(this.schema, null, 2));
   }
 }
 
