@@ -100,7 +100,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           commit: "main"
-          tag: "FSQL - ${{ steps.package-version.outputs.current-version }}"
+          tag: "FSQL-${{ steps.package-version.outputs.current-version }}"
           generateReleaseNotes: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -173,7 +173,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           commit: "main"
-          tag: "hook-form-react - ${{ steps.package-version.outputs.current-version }}"
+          tag: "hook-form-react-${{ steps.package-version.outputs.current-version }}"
           generateReleaseNotes: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
 
