@@ -7,11 +7,9 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: ./packages/hook-form-react
     outputs:
       hook-form-react: ${{ steps.hook-form-react.outputs.src }}
+      fsql: ${{ steps.fsql.outputs.src }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,6 +25,87 @@ jobs:
               - './package.json'
               - './bun.lockb'
               - './.github/workflows/deploy.yml'
+      - uses: dorny/paths-filter@v2
+        id: fsql
+        with:
+          filters: |
+            src:
+              - './packages/FSQL/src/**'
+              - './packages/FSQL/package.json'
+              - './package.json'
+              - './bun.lockb'
+              - './.github/workflows/deploy.yml'
+
+  deploy-fsql:
+    runs-on: ubuntu-22.04
+    needs:
+      - setup
+    if: needs.setup.outputs.fsql == 'true'
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install deps
+        run: bun install
+        working-directory: ./packages/FSQL
+
+#      - name: Lint
+#        run: bun lint
+
+      - name: Test
+        run: bun run test
+
+      - name: Size
+        run: bun size
+        working-directory: ./packages/FSQL
+
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - run: echo //registry.npmjs.org/:_authToken=${{ secrets.npm_tokem }} > .npmrc
+
+      - name: Authenticate with Registry
+        run: |
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - id: release
+        name: Release
+        run: bun run release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./packages/FSQL
+
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        with:
+          path: ./packages/FSQL
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          commit: "main"
+          tag: "FSQL - ${{ steps.package-version.outputs.current-version }}"
+          generateReleaseNotes: "true"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - run: git push
 
   deploy-hook-form-react:
     runs-on: ubuntu-22.04
