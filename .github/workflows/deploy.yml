@@ -109,6 +109,7 @@ jobs:
 
   deploy-hook-form-react:
     runs-on: ubuntu-22.04
+    permissions: write-all
     needs:
       - setup
     if: needs.setup.outputs.hook-form-react == 'true'
