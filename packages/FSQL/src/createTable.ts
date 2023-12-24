@@ -11,7 +11,7 @@ class createTable {
     this.schema = schema;
   }
 
-  public async create() {
+  public async create(): Promise<number> {
     return await Bun.write(`./${this.folder}/${this.database}/${this.table}/schema.json`, JSON.stringify(this.schema, null, 2));
   }
 }
