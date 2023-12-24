@@ -20,10 +20,8 @@ describe('FSQL', () => {
 
     // Test create
     const createdData = await db.create(table).create(data);
-    console.log(createdData);
     expect(createdData).toEqual(data);
 
-    console.log(data);
     // Test read
     const readData = await db.read(table).get();
     expect(readData).toEqual([data]);

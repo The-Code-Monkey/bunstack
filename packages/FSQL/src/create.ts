@@ -10,10 +10,10 @@ export interface createPropsSingle extends createPropsDefault {
   _id?: string;
 }
 
-export interface createPropsMulti extends createPropsDefault {
+export interface createPropsMulti<Data> extends createPropsDefault {
   data: Array<{
     _id?: string;
-  }>;
+  } & Data>;
 }
 
 class create<Data> {
@@ -27,7 +27,7 @@ class create<Data> {
     this.database = _this.database;
   }
 
-  public async create(props: createPropsSingle & Data): Promise<Data | string> {  
+  private async createSingle(props: createPropsSingle & Data): Promise<Data | string> {
     const schemaPath = Bun.file(`${this.folder}/${this.database}/${this.table}/schema.json`);
   
     const schemaExists = await schemaPath.exists();
@@ -60,7 +60,66 @@ class create<Data> {
   
     return props;
   };
-  public async create(props: createPropsMulti): Promise<Data[] | string>;
+
+  private async createMulti(props: createPropsMulti<Data>): Promise<Data[] | string> {
+    const schemaPath = Bun.file(`${this.folder}/${this.database}/${this.table}/schema.json`);
+  
+    const schemaExists = await schemaPath.exists();
+
+    if (!schemaExists) {
+      return `${this.table} - table does not exist`;
+    }
+  
+    const schema = await schemaPath.json();
+  
+    const schemaKeys = Object.keys(schema);
+
+    async function checkColumns() {
+      try {
+        await Promise.all(props.data.map((entry) => {
+          return new Promise((resolve, reject) => {
+            Object.keys(entry).some((column) => schemaKeys.includes(column)) ? resolve('ok') : reject();
+          });
+        }));
+      } catch {
+        return `Invalid column`;
+      }
+    }
+    
+    const dataCheck = await checkColumns();
+
+    if (dataCheck === `Invalid column`) {
+      return dataCheck;
+    }
+
+    const result: Data[] = [];
+
+    for (const entry of props.data) {
+      const _id = entry._id ?? uuid();
+
+      if (entry._id) {
+        delete entry._id;
+      }
+
+      (entry as createPropsSingle).id = _id;
+
+      const path = `${this.folder}/${this.database}/${this.table}/${_id}.json`;
+
+      await Bun.write(path, JSON.stringify(entry, null, 2));
+
+      result.push(entry);
+    }
+
+    return result;
+  }
+
+  public async create(props: createPropsSingle & Data | createPropsMulti<Data>): Promise<Data | string | Data[]> {
+    if ('data' in props) {
+      return this.createMulti(props as createPropsMulti<Data>);
+    } else {
+      return this.createSingle(props as createPropsSingle & Data);
+    }
+  }
 }
 
 export default create;
