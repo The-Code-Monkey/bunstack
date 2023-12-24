@@ -1,5 +1,3 @@
-const { write, file } = Bun;
-
 class createTable {
   public table: string;
   public folder: string;
@@ -14,7 +12,7 @@ class createTable {
   }
 
   public async create() {
-    return await write(`./${this.folder}/${this.database}/${this.table}/schema.json`, this.schema);
+    return await Bun.write(`./${this.folder}/${this.database}/${this.table}/schema.json`, this.schema);
   }
 }
 
