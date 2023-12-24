@@ -2,7 +2,7 @@
   "name": "@bunstack/hook-form-react",
   "author": "The-Code-Monkey",
   "description": "a custom hook form for react",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "homepage": "https://github.com/The-Code-Monkey/hook-form-react",
   "bugs": {
     "url": "https://github.com/The-Code-Monkey/hook-form-react/issues"
