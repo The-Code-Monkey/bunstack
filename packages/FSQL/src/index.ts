@@ -29,7 +29,7 @@ class DB {
           }
         }).create();
 
-        if (result === true) {
+        if (!!result) {
           this.migrate();
         }
       }
