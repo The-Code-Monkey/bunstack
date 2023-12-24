@@ -1,0 +1,9 @@
+*.log
+.DS_Store
+node_modules
+dist
+test
+.npmrc
+.idea
+migrations
+testDB
