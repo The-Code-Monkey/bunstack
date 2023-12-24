@@ -15,7 +15,6 @@
     "rootDir": "src",
     "outDir": "./dist/esm",
     "declarationDir": "dist/types",
-    "lib": ["dom", "esnext"],
-    "typeRoots": ["./node_modules/@types", "./node_modules/bun-types"]
+    "lib": ["dom", "esnext"]
   }
 }
