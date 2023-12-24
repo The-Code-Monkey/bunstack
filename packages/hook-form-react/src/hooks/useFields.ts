@@ -44,6 +44,7 @@ const useFields = <DataType extends DataTypeSingle>({
 
   const onChange =
     (index: number, fieldKey: string) => (e: ChangeEvent<HTMLInputElement>) => {
+      // @ts-expect-error bun types wrong
       const value = e.target.value;
       setFieldsRaw(prevState => {
         const newState = [...prevState];
