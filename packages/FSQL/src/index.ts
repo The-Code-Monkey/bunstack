@@ -2,6 +2,7 @@ import { readdir } from 'node:fs/promises';
 
 import { default as createFn } from './create';
 import { default as readFn } from './read';
+import { default as updateFn } from './update';
 import { default as createTableFn } from './createTable';
 
 type MigrationType = {
@@ -99,14 +100,19 @@ class DB {
     return new createTableFn(this, schema);
   }
 
+  public create<Data>(table: string): createFn<Data> {
+    this.setTable(table);
+    return new createFn<Data>(this);
+  }
+
   public read<Data>(table: string): readFn<Data> {
     this.setTable(table);
     return new readFn<Data>(this);
   }
 
-  public create<Data>(table: string): createFn<Data> {
+  public update<Data>(table: string): updateFn<Data> {
     this.setTable(table);
-    return new createFn<Data>(this);
+    return new updateFn<Data>(this);
   }
 }
 
