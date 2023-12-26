@@ -52,6 +52,7 @@ class DB {
     } else {
       if (lastMigration.length === 0) {
         const migrations = await readdir(migrationsDir).catch((err) => {
+          console.log(err)
           throw new Error(err.message);
         });
 
