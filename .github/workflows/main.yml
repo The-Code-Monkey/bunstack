@@ -22,14 +22,14 @@ jobs:
 #      - name: Lint
 #        run: bun lint
 
-# no tests yet
-#      - name: Test
-#        run: bun run test
+      - name: Test - FSQL
+        run: bun run test
+        working-directory: ./packages/FSQL
 
-      - name: Size
+      - name: Size - Hook Form React
         run: bun size
         working-directory: ./packages/hook-form-react
 
-      - name: Size
+      - name: Size - FSQL
         run: bun size
         working-directory: ./packages/FSQL
