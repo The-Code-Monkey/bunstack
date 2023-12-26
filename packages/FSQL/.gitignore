@@ -5,5 +5,4 @@ dist
 test
 .npmrc
 .idea
-migrations
 testDB

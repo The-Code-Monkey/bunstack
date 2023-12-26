@@ -1,0 +1,8 @@
+{
+    "name": "users",
+    "add": {
+        "first_name": {
+            "type": "string"
+        }
+    }
+}
