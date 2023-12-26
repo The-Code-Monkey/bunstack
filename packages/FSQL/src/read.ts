@@ -137,6 +137,10 @@ class read<Data> {
   if (keyA > keyB) return 1;
   return 0;
 });
+
+      if (this.order === "DESC") {
+        results.reverse();
+      }
     }
 
     if (this.limitNumber) {
