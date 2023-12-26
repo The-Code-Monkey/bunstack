@@ -128,6 +128,17 @@ class read<Data> {
       }
     }
 
+    if (this.order) {
+      results.sort((a, b) => {
+    var keyA = a[this.orderColumn],
+    keyB = b[this.orderColumn];
+  
+  if (keyA < keyB) return -1;
+  if (keyA > keyB) return 1;
+  return 0;
+});
+    }
+
     return result;
   }
 }
