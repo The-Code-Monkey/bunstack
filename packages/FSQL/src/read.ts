@@ -139,6 +139,18 @@ class read<Data> {
 });
     }
 
+    if (this.columnsToGet) {
+      results = results.map(result => {
+        const newResult = {};
+        
+        for (const column in this.columnsToGet) {
+          newResult[column] = result[column];
+        }
+
+        return newResult;
+      })
+    }
+
     return result;
   }
 }
