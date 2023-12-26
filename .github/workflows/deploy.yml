@@ -63,6 +63,7 @@ jobs:
 
       - name: Test
         run: bun --bun test
+        working-directory: ./packages/FSQL
 
       - name: Size
         run: bun size
