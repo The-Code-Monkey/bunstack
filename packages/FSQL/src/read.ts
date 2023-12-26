@@ -109,7 +109,7 @@ class read<Data> {
       }
     }
 
-    const result: any[] = [];
+    const results: any[] = [];
 
     if (this.whereColumn && this.whereColumn.length > 0) {
       const promises = data.map(entry => this.checkFile(entry));
@@ -117,14 +117,14 @@ class read<Data> {
 
       for (const file of promisesResolved) {
         if (file !== null) {
-          result.push(file);
+          results.push(file);
         }
       }
     } else {
       // get all data
       for (const entry of data) {
         const file = await Bun.file(`${this.folder}/${this.database}/${this.table}/${entry}`).json();
-        result.push(file);
+        results.push(file);
       }
     }
 
@@ -159,7 +159,7 @@ class read<Data> {
       })
     }
 
-    return result;
+    return results;
   }
 }
 
