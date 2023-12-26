@@ -147,17 +147,18 @@ class read<Data> {
       results = results.slice(0, this.limitNumber);
     }
 
-   // if (this.columnsToGet) {
-    //  results = results.map(result => {
-    //    const newResult = {};
-   //     
-   //     for (const column in this.columnsToGet) {
-    //      newResult[column] = result[column];
-   //     }
-//
-      //  return newResult;
-   //   })
- //   }
+    if (this.columnsToGet[0] !== "*") {
+      results = results.map(result => {
+        const newResult = {};
+        
+        for (const column in this.columnsToGet) {
+          const key = this.columnsToGet[column];
+          newResult[key] = result[key];
+        }
+
+        return newResult;
+      })
+    }
 
     return results;
   }
