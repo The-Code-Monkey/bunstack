@@ -109,7 +109,7 @@ class read<Data> {
       }
     }
 
-    const result: any[] = [];
+    let results: any[] = [];
 
     if (this.whereColumn && this.whereColumn.length > 0) {
       const promises = data.map(entry => this.checkFile(entry));
@@ -117,18 +117,49 @@ class read<Data> {
 
       for (const file of promisesResolved) {
         if (file !== null) {
-          result.push(file);
+          results.push(file);
         }
       }
     } else {
       // get all data
       for (const entry of data) {
         const file = await Bun.file(`${this.folder}/${this.database}/${this.table}/${entry}`).json();
-        result.push(file);
+        results.push(file);
       }
     }
 
-    return result;
+    if (this.order) {
+      results.sort((a, b) => {
+    var keyA = a[this.orderColumn],
+    keyB = b[this.orderColumn];
+  
+  if (keyA < keyB) return -1;
+  if (keyA > keyB) return 1;
+  return 0;
+});
+
+      if (this.order === "DESC") {
+        results.reverse();
+      }
+    }
+
+    if (this.limitNumber) {
+      results = results.slice(0, this.limitNumber);
+    }
+
+    if (this.columnsToGet) {
+      results = results.map(result => {
+        const newResult = {};
+        
+        for (const column in this.columnsToGet) {
+          newResult[column] = result[column];
+        }
+
+        return newResult;
+      })
+    }
+
+    return results;
   }
 }
 
