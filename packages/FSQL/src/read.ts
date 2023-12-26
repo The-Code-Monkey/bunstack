@@ -139,6 +139,10 @@ class read<Data> {
 });
     }
 
+    if (this.limitNumber) {
+      results = results.slice(0, this.limitNumber);
+    }
+
     if (this.columnsToGet) {
       results = results.map(result => {
         const newResult = {};
