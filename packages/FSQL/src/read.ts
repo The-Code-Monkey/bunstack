@@ -109,7 +109,7 @@ class read<Data> {
       }
     }
 
-    const results: any[] = [];
+    let results: any[] = [];
 
     if (this.whereColumn && this.whereColumn.length > 0) {
       const promises = data.map(entry => this.checkFile(entry));
