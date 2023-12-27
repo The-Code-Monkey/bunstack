@@ -39,6 +39,7 @@ jobs:
 
   deploy-fsql:
     runs-on: ubuntu-22.04
+    permissions: write-all
     needs:
       - setup
     if: needs.setup.outputs.fsql == 'true'
