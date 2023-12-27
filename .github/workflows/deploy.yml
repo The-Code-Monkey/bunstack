@@ -102,7 +102,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           commit: "main"
-          tag: "FSQL-${{ steps.package-version.outputs.current-version }}"
+          tag: "fsql-${{ steps.package-version.outputs.current-version }}"
           generateReleaseNotes: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
 
