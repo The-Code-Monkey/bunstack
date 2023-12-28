@@ -14,6 +14,11 @@ describe('FSQL', () => {
     db = await new DB().init('testDB');
   });
 
+  test('check that the migrations table is created', async () => {
+    const migrations = await db.read('migrations').get();
+    expect(migrations.length).toBeGreaterThan(0);
+  });
+
   test('create and read data', async () => {
     const data = { first_name: 'Test', last_name: 'User' };
     const table = 'users';
