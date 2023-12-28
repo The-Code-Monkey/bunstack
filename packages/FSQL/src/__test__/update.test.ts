@@ -22,8 +22,8 @@ describe('update', () => {
 
       const result = await updateInstance.update('99', data);
       const newData = await readInstance.where('id', '=', '99').get();
-
-      expect(newData.age).toEqual(data.age);
+        
+      expect(newData[0].age).toEqual(data.age);
     });
 
 });
