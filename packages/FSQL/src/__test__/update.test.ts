@@ -1,13 +1,13 @@
-import { describe, beforeAll, test, expect, beforeEach } from 'bun:test';
+import { describe, beforeAll, test, expect } from 'bun:test';
 
 import DB from '../index';
 import update from '../update';
 import read from '../read';
 
 describe('update', () => {
-    let db: any;
-    let updateInstance: update<any>;
-    let readInstance: read<any>;
+    let db: DB;
+    let updateInstance: update<object>;
+    let readInstance: read<object>;
 
     beforeAll(async () => {
         db = await new DB().init('testDB');

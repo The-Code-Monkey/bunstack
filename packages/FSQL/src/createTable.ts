@@ -1,10 +1,12 @@
+import DB from '.';
+
 class createTable {
   public table: string;
   public folder: string;
   public database: string;
   public schema: Record<'add' | 'remove', object>;
   
-  constructor(_this: any, schema: Record<'add' | 'remove', object>) {
+  constructor(_this: DB, schema: Record<'add' | 'remove', object>) {
     this.table = _this.table;
     this.folder = _this.folder;
     this.database = _this.database;

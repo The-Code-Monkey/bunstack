@@ -4,7 +4,7 @@ import DB from '../index';
 import create, { createPropsSingle, createPropsMulti } from '../create';
 
 describe('create', () => {
-    let db: any;
+    let db: DB;
     let createInstance: create<object>;
 
     beforeAll(async () => {

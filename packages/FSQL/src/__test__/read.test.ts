@@ -4,8 +4,8 @@ import DB from '../index';
 import read from '../read';
 
 describe('read', () => {
-    let db: any;
-    let readInstance: read<any>;
+    let db: DB;
+    let readInstance: read<object>;
 
     beforeAll(async () => {
         db = await new DB().init('testDB');

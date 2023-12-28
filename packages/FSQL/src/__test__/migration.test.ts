@@ -2,13 +2,8 @@ import { describe, beforeAll, test, expect } from 'bun:test';
 
 import DB from '../index';
 
-type UserType = {
-  first_name: string;
-  last_name: string;
-};
-
 describe('migration', () => {
-  let db: any;
+  let db: DB;
 
   beforeAll(async () => {
     db = await new DB().init('testDB');
