@@ -20,6 +20,8 @@ class update<Data> {
       return `${this.table} - table does not exist`;
     }
 
+    const schema = await schemaPath.json();
+
     const schemaKeys = Object.keys(schema);
 
     const invalidColumns = Object.keys(data).filter((column) => !schemaKeys.includes(column));
