@@ -1,4 +1,4 @@
-import { describe, beforeAll, test, expect, beforeEach } from 'bun:test';
+import { describe, beforeAll, test, expect } from 'bun:test';
 
 import DB from '../index';
 import update from '../update';
