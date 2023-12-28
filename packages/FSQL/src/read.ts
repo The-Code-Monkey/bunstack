@@ -39,7 +39,7 @@ class read<Data> {
     }
   }
 
-  private async checkFile(entry: any): Promise<Data> {
+  private async checkFile(entry: string): Promise<Data> {
     const file = await Bun.file(`${this.folder}/${this.database}/${this.table}/${entry}`).json();
   
     // for each whereColumn, whereOperator, whereValue check if the file matches the condition

@@ -1,7 +1,9 @@
 import { v4 as uuid } from 'uuid';
 
+import DB from '.';
+
 type createPropsDefault = {
-  [x in string]: any;
+  [x in string]: string | number | boolean | Date;
 }
 
 export interface createPropsSingle extends createPropsDefault {
@@ -20,7 +22,7 @@ class create<Data> {
   public folder: string;
   public database: string;
 
-  constructor(_this: any) {
+  constructor(_this: DB) {
     this.table = _this.table;
     this.folder = _this.folder;
     this.database = _this.database;
