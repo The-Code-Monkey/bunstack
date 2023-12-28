@@ -151,7 +151,7 @@ class read<Data> {
 
     if (this.columnsToGet[0] !== "*") {
       results = results.map(result => {
-        const newResult = {};
+        const newResult = {} as Data;
         
         for (const column in this.columnsToGet) {
           const key = this.columnsToGet[column];
