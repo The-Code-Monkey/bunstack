@@ -45,7 +45,7 @@ class DB {
           remove: {},
         }).create());
 
-        if (!!result) {
+        if (result) {
           await this.migrate();
         }
       }
