@@ -23,7 +23,7 @@ class read<Data> {
     this.whereValue = [];
   }
 
-  private checkCondition(fileValue: string | number | boolean, operator: string, value: string | number | boolean): boolean {
+  private checkCondition(fileValue: unknown, operator: string, value: unknown): boolean {
     switch (operator) {
       case '=':
         return fileValue === value;
