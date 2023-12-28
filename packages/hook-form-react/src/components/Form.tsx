@@ -5,7 +5,7 @@ import {SchemaType} from "../types";
 
 export interface FormProps extends PropsWithChildren {
     schema: SchemaType;
-    onSubmit: (data: any) => void;
+    onSubmit: (data: object) => void;
 }
 
 const Form = ({ children, schema, onSubmit }: FormProps) => {
