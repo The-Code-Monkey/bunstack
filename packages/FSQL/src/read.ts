@@ -1,5 +1,7 @@
 import { readdir } from 'node:fs/promises';
 
+import DB from '.';
+
 class read<Data> {
   public table: string;
   public folder: string;
@@ -10,9 +12,9 @@ class read<Data> {
   public limitNumber: number;
   public whereColumn: string[];
   public whereOperator: string[];
-  public whereValue: string[];
+  public whereValue: Array<string | number | boolean>;
   
-  constructor(_this: any) {
+  constructor(_this: DB) {
     this.table = _this.table;
     this.folder = _this.folder;
     this.database = _this.database;
@@ -21,7 +23,7 @@ class read<Data> {
     this.whereValue = [];
   }
 
-  private checkCondition(fileValue: any, operator: string, value: any): boolean {
+  private checkCondition(fileValue: string | number | boolean, operator: string, value: string | number | boolean): boolean {
     switch (operator) {
       case '=':
         return fileValue === value;
@@ -37,7 +39,7 @@ class read<Data> {
     }
   }
 
-  private async checkFile(entry: any): Promise<any> {
+  private async checkFile(entry: any): Promise<Data> {
     const file = await Bun.file(`${this.folder}/${this.database}/${this.table}/${entry}`).json();
   
     // for each whereColumn, whereOperator, whereValue check if the file matches the condition
@@ -73,7 +75,7 @@ class read<Data> {
     return this;
   }
 
-  public where(column: string, operator: string, value: any) {
+  public where(column: string, operator: string, value: string | number | boolean) {
     this.whereColumn = [...this.whereColumn, column];
     this.whereOperator = [...this.whereOperator, operator];
     this.whereValue = [...this.whereValue, value];
@@ -109,7 +111,7 @@ class read<Data> {
       }
     }
 
-    let results: any[] = [];
+    let results: Data[] = [];
 
     if (this.whereColumn && this.whereColumn.length > 0) {
       const promises = data.map(entry => this.checkFile(entry));
@@ -149,7 +151,7 @@ class read<Data> {
 
     if (this.columnsToGet[0] !== "*") {
       results = results.map(result => {
-        const newResult = {};
+        const newResult = {} as Data;
         
         for (const column in this.columnsToGet) {
           const key = this.columnsToGet[column];
