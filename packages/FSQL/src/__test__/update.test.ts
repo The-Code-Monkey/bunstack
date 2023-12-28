@@ -20,7 +20,7 @@ describe('update', () => {
         age: 50
       };
 
-      const result = await updateInstance.update('99', data);
+      await updateInstance.update('99', data);
       const newData = await readInstance.where('id', '=', '99').get();
         
       expect(newData[0].age).toEqual(data.age);
