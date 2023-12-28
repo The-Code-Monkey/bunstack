@@ -47,13 +47,19 @@ class create<Data> {
 
     (props as createPropsDefault).id = _id;
 
-    const invalidColumns = Object.keys(props).some((column) => !schemaKeys.includes(column));
+    const invalidColumns = Object.keys(props).filter((column) => !schemaKeys.includes(column));
 
-    if (invalidColumns) {
-      return `Invalid column`;
+    if (invalidColumns.length > 0) {
+      return `Invalid column${invalidColumns.length > 1 ? 's' : ''} - ${invalidColumns.join(', ')}`;
     }
 
     const path = `${this.folder}/${this.database}/${this.table}/${_id}.json`;
+
+    const fileExists = await Bun.file(path).exists();
+
+    if (fileExists) {
+      return `${_id} already exists`;
+    }
 
     await Bun.write(path, JSON.stringify(props, null, 2));
   
@@ -73,38 +79,24 @@ class create<Data> {
   
     const schemaKeys = Object.keys(schema);
 
-    async function checkColumns() {
-      try {
-        await Promise.all(props.data.map((entry) => {
-          return new Promise((resolve, reject) => {
-            Object.keys(entry).some((column) => schemaKeys.includes(column)) ? resolve('ok') : reject();
-          });
-        }));
-      } catch {
-        return `Invalid column`;
-      }
+    async function checkColumns(): Promise<Array<string[]>> {
+      return await Promise.all(props.data.map((entry: Record<string, unknown>) => {
+        return new Promise<string[]>((resolve) => {
+          resolve(Object.keys(entry).filter((column) => column !== '_id' && !schemaKeys.includes(column)));
+        });
+      }));
     }
-    
     const dataCheck = await checkColumns();
 
-    if (dataCheck === `Invalid column`) {
-      return dataCheck;
+    if (dataCheck.some((columns) => columns.length > 0)) {
+      const invalidColumns = dataCheck.flat();
+      return `Invalid column${invalidColumns.length > 1 ? 's' : ''} - ${invalidColumns.join(', ')}`;
     }
 
     const result: Data[] = [];
 
     for (const entry of props.data) {
-      const _id = entry._id ?? uuid();
-
-      if (entry._id) {
-        delete entry._id;
-      }
-
-      (entry as createPropsDefault).id = _id;
-
-      const path = `${this.folder}/${this.database}/${this.table}/${_id}.json`;
-
-      await Bun.write(path, JSON.stringify(entry, null, 2));
+      await this.createSingle(entry);
 
       result.push(entry);
     }

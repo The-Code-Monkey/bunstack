@@ -14,6 +14,7 @@
   "scripts": {
     "build": "rm -rf dist && mkdir dist && bun run build.ts",
     "prepare": "bun run build",
+    "test": "bun --bun test -t migration && bun --bun test -t create && bun --bun test -t read",
     "size": "size-limit",
     "release": "yarn version --patch && yarn publish --non-interactive"
   },

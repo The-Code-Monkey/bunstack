@@ -63,7 +63,7 @@ jobs:
 #        run: bun lint
 
       - name: Test
-        run: bun --bun test
+        run: bun run test
         working-directory: ./packages/FSQL
 
       - name: Size

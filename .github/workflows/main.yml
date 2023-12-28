@@ -23,7 +23,7 @@ jobs:
 #        run: bun lint
 
       - name: Test - FSQL
-        run: bun test
+        run: bun run test
         working-directory: ./packages/FSQL
 
       - name: Size - Hook Form React
