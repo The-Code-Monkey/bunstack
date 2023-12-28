@@ -35,7 +35,7 @@ class update<Data> {
     const fileExists = await Bun.file(path).exists();
 
     if (!fileExists) {
-      return `${_id} does not exist`;
+      return `${id} does not exist`;
     }
 
     const oldData = await Bun.file(path).json();
