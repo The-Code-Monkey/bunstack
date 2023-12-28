@@ -39,4 +39,11 @@ describe('read', () => {
         const result = await readInstance.get();
         expect(result.every((row) => row.age > 18)).toBe(true);
     });
+
+    test('should return data by id', async () => {
+        readInstance.where('id', '=', '99');
+        const result = await readInstance.get();
+
+        expect(result).toEqual('test');
+    })
 });
