@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import DB from '.';
 
 type createPropsDefault = {
-  [x in string]: string | number | boolean;
+  [x in string]: string | number | boolean | Date;
 }
 
 export interface createPropsSingle extends createPropsDefault {
