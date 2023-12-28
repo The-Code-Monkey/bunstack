@@ -43,6 +43,8 @@ class update<Data> {
       ...data
     };
 
+    await Bun.write(path, JSON.stringify(newData, null, 2));
+
     return newData;
   }
 
