@@ -44,6 +44,10 @@ describe('read', () => {
         readInstance.where('id', '=', '99');
         const result = await readInstance.get();
 
-        expect(result).toEqual('test');
+        expect(result[0]).toEqual({
+      name: "John Doe 2",
+      age: 32,
+      id: "99",
+        });
     })
 });
