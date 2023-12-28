@@ -20,7 +20,9 @@ class update<Data> {
       return `${this.table} - table does not exist`;
     }
 
-    const invalidColumns = Object.keys(props).filter((column) => !schemaKeys.includes(column));
+    const schemaKeys = Object.keys(schema);
+
+    const invalidColumns = Object.keys(data).filter((column) => !schemaKeys.includes(column));
 
     if (invalidColumns.length > 0) {
       return `Invalid column${invalidColumns.length > 1 ? 's' : ''} - ${invalidColumns.join(', ')}`;
