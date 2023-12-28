@@ -26,4 +26,9 @@ describe('update', () => {
       expect(newData[0].age).toEqual(data.age);
     });
 
+    test('does not exist', async () => {
+        const result = await updateInstance.update('9000', {});
+        expect(result.includes('does not exist')).toEqual(true);
+    });
+
 });
