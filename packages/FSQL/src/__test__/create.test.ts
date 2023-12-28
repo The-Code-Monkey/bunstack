@@ -5,11 +5,11 @@ import create, { createPropsSingle, createPropsMulti } from '../create';
 
 describe('create', () => {
     let db: any;
-    let createInstance: create<any>;
+    let createInstance: create<object>;
 
     beforeAll(async () => {
         db = await new DB().init('testDB');
-        createInstance = db.create('users');
+        createInstance = db.create<object>('users');
     });
 
     test('should create a single entry without specifying an id', async () => {
@@ -25,7 +25,7 @@ describe('create', () => {
       });
       
       test('should create multiple entries without specifying ids', async () => {
-        const props: createPropsMulti<any> = {
+        const props: createPropsMulti<object> = {
           data: [
             { name: 'John Doe', age: 30 },
             { name: 'Jane Doe', age: 25 },
@@ -55,7 +55,7 @@ describe('create', () => {
     });
 
     test('should create multiple entries', async () => {
-        const props: createPropsMulti<any> = {
+        const props: createPropsMulti<object> = {
             data: [
                 {
                     _id: '99',
