@@ -12,7 +12,7 @@ class read<Data> {
   public limitNumber: number;
   public whereColumn: string[];
   public whereOperator: string[];
-  public whereValue: string[];
+  public whereValue: Array<string | number | boolean>;
   
   constructor(_this: DB) {
     this.table = _this.table;
@@ -23,7 +23,7 @@ class read<Data> {
     this.whereValue = [];
   }
 
-  private checkCondition(fileValue: unknown, operator: string, value: unknown): boolean {
+  private checkCondition(fileValue: string | number | boolean, operator: string, value: string | number | boolean): boolean {
     switch (operator) {
       case '=':
         return fileValue === value;
