@@ -15,7 +15,7 @@ describe('update', () => {
         readInstance = db.read('users');
     });
 
-    test('update index', () => {
+    test('update index', async () => {
       const data = {
         age: 50
       };
