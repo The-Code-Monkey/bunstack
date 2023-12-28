@@ -64,7 +64,7 @@ class create<Data> {
     await Bun.write(path, JSON.stringify(props, null, 2));
   
     return props;
-  };
+  }
 
   private async createMulti(props: createPropsMulti<Data>): Promise<Data[] | string> {
     const schemaPath = Bun.file(`${this.folder}/${this.database}/${this.table}/schema.json`);
