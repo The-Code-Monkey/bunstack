@@ -107,6 +107,7 @@ jobs:
           generateReleaseNotes: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - run: git pull
 
       - run: git push
 
@@ -179,6 +180,5 @@ jobs:
           tag: "hook-form-react-${{ steps.package-version.outputs.current-version }}"
           generateReleaseNotes: "true"
           token: ${{ secrets.GITHUB_TOKEN }}
-
-
+      - run: git pull
       - run: git push
