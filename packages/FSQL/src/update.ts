@@ -40,6 +40,7 @@ class update<Data> {
 
     const newData = {
       ...oldData,
+      ...data
     };
 
     return newData;
