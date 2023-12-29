@@ -34,8 +34,8 @@ describe('create', () => {
         expect(result).toBeInstanceOf(Array);
         result.forEach((entry, index) => {
           expect(entry).toHaveProperty('id');
-          expect(entry.name).toBe(props.data[index].name);
-          expect(entry.age).toBe(props.data[index].age);
+          expect(entry.name).toBe(props[index].name);
+          expect(entry.age).toBe(props[index].age);
         });
       });
     
@@ -68,7 +68,7 @@ describe('create', () => {
 
         const result = await createInstance.create(props);
 
-        expect(result).toEqual(props.data);
+        expect(result).toEqual(props);
     });
 
     test('should return error if file exists', async () => {
