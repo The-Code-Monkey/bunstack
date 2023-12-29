@@ -37,4 +37,4 @@ class deleteFn {
 
 }
 
-export default update;
+export default deleteFn;
