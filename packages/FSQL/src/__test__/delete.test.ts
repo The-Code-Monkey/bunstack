@@ -17,7 +17,7 @@ describe('delete', () => {
 
     test('delete index', async () => {
       await deleteInstance.delete('2');
-      const result = await readInstance.where('id', '=', '99').get();
+      const result = await readInstance.where('id', '=', '2').get();
         
       expect(result).toEqual(null);
     });
