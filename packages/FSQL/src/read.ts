@@ -13,6 +13,7 @@ class read<Data> {
   public whereColumn: string[];
   public whereOperator: string[];
   public whereValue: Array<string | number | boolean>;
+  public joins: Array<[string, string]>;
   
   constructor(_this: DB) {
     this.table = _this.table;
