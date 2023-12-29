@@ -16,7 +16,7 @@ describe('update', () => {
     });
 
     test('update index', async () => {
-      await deleteInstance.delete('99');
+      await deleteInstance.delete('2');
       const result = await readInstance.where('id', '=', '99').get();
         
       expect(result).toEqual(null);
