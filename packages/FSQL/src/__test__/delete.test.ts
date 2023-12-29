@@ -24,6 +24,6 @@ describe('delete', () => {
 
     test('delete index that doesnt exist', async () => {
         const result = await deleteInstance.delete('9000');
-        expect(result).toEqual(null);
+        expect(result.includes('does not exist')).toEqual(true);
     });
 });
