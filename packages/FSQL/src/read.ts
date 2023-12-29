@@ -156,6 +156,10 @@ class read<Data> {
       results = results.slice(0, this.limitNumber);
     }
 
+    if (this.joins.length > 0) {
+
+    }
+
     if (this.columnsToGet[0] !== "*") {
       results = results.map(result => {
         const newResult = {} as Data;
