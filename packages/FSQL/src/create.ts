@@ -102,7 +102,7 @@ class create<Data> {
   }
 
   public async create(props: createPropsSingle<Data> | createPropsMulti<Data>): Promise<Data | string | Data[]> {
-    if ('data' in props) {
+    if (Array.isArray(props)) {
       return this.createMulti(props as createPropsMulti<Data>);
     } else {
       return this.createSingle(props as createPropsSingle<Data>);
