@@ -157,7 +157,16 @@ class read<Data> {
     }
 
     if (this.joins.length > 0) {
+      for (const index in this.joins) {
+        const join = this.joins[index];
+        const hasKey = !!join[1];
 
+        if (hasKey) {
+          results = results.map(result => ({ ...result, [join[0]]: {} }));
+        } else {
+          results = results.map(result => ({ ...result, [join[0]]: {} }));
+        }
+      }
     }
 
     if (this.columnsToGet[0] !== "*") {
