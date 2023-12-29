@@ -2,7 +2,7 @@ import { unlink } from "node:fs/promises";
 
 import DB from '.';
 
-class delete {
+class deleteFn {
   public table: string;
   public folder: string;
   public database: string;
