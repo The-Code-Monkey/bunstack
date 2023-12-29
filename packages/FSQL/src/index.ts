@@ -3,6 +3,7 @@ import { readdir } from 'node:fs/promises';
 import { default as createFn } from './create';
 import { default as readFn } from './read';
 import { default as updateFn } from './update';
+import { default as deleteFn } from './delete';
 import { default as createTableFn } from './createTable';
 
 type MigrationType = {
@@ -114,6 +115,11 @@ class DB {
   public update<Data>(table: string): updateFn<Data> {
     this.setTable(table);
     return new updateFn<Data>(this);
+  }
+
+  public delete(table: string): deleteFn {
+    this.setTable(table);
+    return new deleteFn(this);
   }
 }
 
