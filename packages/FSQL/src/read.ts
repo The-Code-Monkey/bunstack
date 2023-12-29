@@ -60,6 +60,10 @@ class read<Data> {
     return null;
   }
 
+  public join(table: string, column?: string) {
+    return this;
+  }
+
   public orderBy(column: string, order: 'ASC' | 'DESC') {
     this.orderColumn = column;
     this.order = order;
