@@ -25,12 +25,10 @@ describe('create', () => {
       });
       
       test('should create multiple entries without specifying ids', async () => {
-        const props: createPropsMulti<object> = {
-          data: [
-            { name: 'John Doe', age: 30 },
-            { name: 'Jane Doe', age: 25 },
-          ],
-        };
+        const props: createPropsMulti<object> = [
+          { name: 'John Doe', age: 30 },
+          { name: 'Jane Doe', age: 25 },
+        ],
       
         const result = await createInstance.create(props);
         expect(result).toBeInstanceOf(Array);
@@ -55,8 +53,7 @@ describe('create', () => {
     });
 
     test('should create multiple entries', async () => {
-        const props: createPropsMulti<object> = {
-            data: [
+        const props: createPropsMulti<object> = [
                 {
                     _id: '99',
                     name: 'John Doe 2',
@@ -67,8 +64,7 @@ describe('create', () => {
                     name: 'Jane Smith',
                     age: 25,
                 },
-            ],
-        };
+            ];
 
         const result = await createInstance.create(props);
 
