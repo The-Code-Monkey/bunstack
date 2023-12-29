@@ -77,7 +77,7 @@ class create<Data> {
     const schemaKeys = Object.keys(schema);
 
     async function checkColumns(): Promise<Array<string[]>> {
-      return await Promise.all(props.data.map((entry: Record<string, unknown>) => {
+      return await Promise.all(props.map((entry: Record<string, unknown>) => {
         return new Promise<string[]>((resolve) => {
           resolve(Object.keys(entry).filter((column) => column !== '_id' && !schemaKeys.includes(column)));
         });
@@ -92,7 +92,7 @@ class create<Data> {
 
     const result: Data[] = [];
 
-    for (const entry of props.data) {
+    for (const entry of props) {
       await this.createSingle(entry);
 
       result.push(entry);
