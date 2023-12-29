@@ -19,7 +19,11 @@ describe('delete', () => {
       await deleteInstance.delete('2');
       const result = await readInstance.where('id', '=', '2').get();
         
-      expect(result).toEqual(null);
+      expect(result).toEqual([]);
     });
 
+    test('delete index that doesnt exist', async () => {
+        const result = await deleteInstance.delete('9000');
+        expect(result).toEqual(null);
+    });
 });
