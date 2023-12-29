@@ -25,19 +25,17 @@ describe('create', () => {
       });
       
       test('should create multiple entries without specifying ids', async () => {
-        const props: createPropsMulti<object> = {
-          data: [
-            { name: 'John Doe', age: 30 },
-            { name: 'Jane Doe', age: 25 },
-          ],
-        };
+        const props: createPropsMulti<object> = [
+          { name: 'John Doe', age: 30 },
+          { name: 'Jane Doe', age: 25 },
+        ];
       
         const result = await createInstance.create(props);
         expect(result).toBeInstanceOf(Array);
         result.forEach((entry, index) => {
           expect(entry).toHaveProperty('id');
-          expect(entry.name).toBe(props.data[index].name);
-          expect(entry.age).toBe(props.data[index].age);
+          expect(entry.name).toBe(props[index].name);
+          expect(entry.age).toBe(props[index].age);
         });
       });
     
@@ -55,8 +53,7 @@ describe('create', () => {
     });
 
     test('should create multiple entries', async () => {
-        const props: createPropsMulti<object> = {
-            data: [
+        const props: createPropsMulti<object> = [
                 {
                     _id: '99',
                     name: 'John Doe 2',
@@ -67,12 +64,11 @@ describe('create', () => {
                     name: 'Jane Smith',
                     age: 25,
                 },
-            ],
-        };
+            ];
 
         const result = await createInstance.create(props);
 
-        expect(result).toEqual(props.data);
+        expect(result).toEqual(props);
     });
 
     test('should return error if file exists', async () => {

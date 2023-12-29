@@ -6,16 +6,11 @@ type createPropsDefault = {
   [x in string]: string | number | boolean | Date;
 }
 
-export interface createPropsSingle extends createPropsDefault {
+export type createPropsSingle<Data> = createPropsDefault & {
   _id?: string;
-  data?: never;
-}
+} & Data;
 
-export interface createPropsMulti<Data> {
-  data: Array<{
-    _id?: string;
-  } & Data & createPropsDefault>;
-}
+export type createPropsMulti<Data> = Array<createPropsSingle<Data>>;
 
 class create<Data> {
   public table: string;
@@ -28,7 +23,7 @@ class create<Data> {
     this.database = _this.database;
   }
 
-  private async createSingle(props: createPropsSingle & Data): Promise<Data | string> {
+  private async createSingle(props: createPropsSingle<Data>): Promise<Data | string> {
     const schemaPath = Bun.file(`${this.folder}/${this.database}/${this.table}/schema.json`);
   
     const schemaExists = await schemaPath.exists();
@@ -82,7 +77,7 @@ class create<Data> {
     const schemaKeys = Object.keys(schema);
 
     async function checkColumns(): Promise<Array<string[]>> {
-      return await Promise.all(props.data.map((entry: Record<string, unknown>) => {
+      return await Promise.all(props.map((entry: Record<string, unknown>) => {
         return new Promise<string[]>((resolve) => {
           resolve(Object.keys(entry).filter((column) => column !== '_id' && !schemaKeys.includes(column)));
         });
@@ -97,7 +92,7 @@ class create<Data> {
 
     const result: Data[] = [];
 
-    for (const entry of props.data) {
+    for (const entry of props) {
       await this.createSingle(entry);
 
       result.push(entry);
@@ -106,11 +101,11 @@ class create<Data> {
     return result;
   }
 
-  public async create(props: createPropsSingle & Data | createPropsMulti<Data>): Promise<Data | string | Data[]> {
-    if ('data' in props) {
+  public async create(props: createPropsSingle<Data> | createPropsMulti<Data>): Promise<Data | string | Data[]> {
+    if (Array.isArray(props)) {
       return this.createMulti(props as createPropsMulti<Data>);
     } else {
-      return this.createSingle(props as createPropsSingle & Data);
+      return this.createSingle(props as createPropsSingle<Data>);
     }
   }
 }
