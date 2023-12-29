@@ -28,7 +28,7 @@ describe('create', () => {
         const props: createPropsMulti<object> = [
           { name: 'John Doe', age: 30 },
           { name: 'Jane Doe', age: 25 },
-        ],
+        ];
       
         const result = await createInstance.create(props);
         expect(result).toBeInstanceOf(Array);
