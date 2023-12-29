@@ -22,6 +22,7 @@ class read<Data> {
     this.whereColumn = [];
     this.whereOperator = [];
     this.whereValue = [];
+    this.joins = [];
   }
 
   private checkCondition(fileValue: string | number | boolean, operator: string, value: string | number | boolean): boolean {
@@ -61,6 +62,7 @@ class read<Data> {
   }
 
   public join(table: string, column?: string) {
+    this.joins = [...this.joins, [table, column]];
     return this;
   }
 
