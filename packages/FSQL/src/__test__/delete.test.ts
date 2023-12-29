@@ -4,7 +4,7 @@ import DB from '../index';
 import deleteFn from '../delete';
 import readFn from '../read';
 
-describe('update', () => {
+describe('delete', () => {
     let db: DB;
     let deleteInstance: deleteFn;
     let readInstance: readFn;
@@ -15,7 +15,7 @@ describe('update', () => {
         readInstance = db.read('users');
     });
 
-    test('update index', async () => {
+    test('delete index', async () => {
       await deleteInstance.delete('2');
       const result = await readInstance.where('id', '=', '99').get();
         
