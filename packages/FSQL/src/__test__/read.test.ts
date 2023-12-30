@@ -49,5 +49,11 @@ describe('read', () => {
       age: 32,
       id: "99",
         });
-    })
+    });
+
+    test('should join data to result', async () => {
+        const result = await readInstance.where('id', '=', '99').join('roles', 'roleId').get();
+
+        expect(result).toEqual(null);
+    });
 });
