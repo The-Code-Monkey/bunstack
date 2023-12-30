@@ -102,17 +102,17 @@ class DB {
     return new createTableFn(this, schema);
   }
 
-  public create<Data>(table: string): createFn<Data> {
+  public create<Data extends object>(table: string): createFn<Data> {
     this.setTable(table);
     return new createFn<Data>(this);
   }
 
-  public read<Data>(table: string): readFn<Data> {
+  public read<Data extends object>(table: string): readFn<Data> {
     this.setTable(table);
     return new readFn<Data>(this);
   }
 
-  public update<Data>(table: string): updateFn<Data> {
+  public update<Data extends object>(table: string): updateFn<Data> {
     this.setTable(table);
     return new updateFn<Data>(this);
   }
