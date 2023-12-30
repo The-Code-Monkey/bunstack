@@ -164,7 +164,8 @@ class read<Data> {
         if (hasKey) {
           results = results.map(result => {
             const keyValue = result[join[1]];
-            return { ...result, [join[0]]: {} }
+            const value = new read({ table: join[0], folder: this.folder, database: this.database }).where('id', '=', keyValue).get();
+            return { ...result, [join[0]]: value }
           });
         } else {
           results = results.map(result => ({ ...result, [join[0]]: {} }));
