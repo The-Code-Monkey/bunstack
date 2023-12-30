@@ -162,7 +162,10 @@ class read<Data> {
         const hasKey = !!join[1];
 
         if (hasKey) {
-          results = results.map(result => ({ ...result, [join[0]]: {} }));
+          results = results.map(result => {
+            const keyValue = result[join[1]];
+            return { ...result, [join[0]]: {} }
+          });
         } else {
           results = results.map(result => ({ ...result, [join[0]]: {} }));
         }
