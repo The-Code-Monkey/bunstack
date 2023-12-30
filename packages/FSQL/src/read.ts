@@ -2,7 +2,7 @@ import { readdir } from 'node:fs/promises';
 
 import DB from '.';
 
-class read<Data> {
+class read<Data extends object> {
   public table: string;
   public folder: string;
   public database: string;
