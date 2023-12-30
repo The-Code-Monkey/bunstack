@@ -1,0 +1,11 @@
+{
+  "name": "roles",
+  "add": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}
