@@ -58,6 +58,7 @@ describe('create', () => {
                     _id: '99',
                     name: 'John Doe 2',
                     age: 32,
+                    roleId: '12',
                 },
                 {
                     _id: '24',
