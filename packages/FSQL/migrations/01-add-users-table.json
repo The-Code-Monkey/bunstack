@@ -9,6 +9,10 @@
         },
         "age": {
             "type": "number"
+        },
+        "roleId": {
+            "type": "string",
+            "nullable": true
         }
     }
 }

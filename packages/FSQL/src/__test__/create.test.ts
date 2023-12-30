@@ -58,6 +58,7 @@ describe('create', () => {
                     _id: '99',
                     name: 'John Doe 2',
                     age: 32,
+                    roleId: '12',
                 },
                 {
                     _id: '24',
@@ -81,5 +82,12 @@ describe('create', () => {
     
         // Check if the function returns the correct error message
         expect(result).toEqual('2 already exists');
+    });
+
+    test('should create a role', async () => {
+        db.create('roles').create({
+            _id: '12',
+            name: 'test'
+        });
     });
 });

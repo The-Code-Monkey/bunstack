@@ -48,6 +48,27 @@ describe('read', () => {
       name: "John Doe 2",
       age: 32,
       id: "99",
+            "roleId": "12"
         });
-    })
+    });
+
+    test('should join data to result', async () => {
+        readInstance.where('id', '=', '99').join('roles', 'roleId');
+        const result = await readInstance.get();
+
+        expect(result).toEqual([
+    {
+      name: "John Doe 2",
+      age: 32,
+      roleId: "12",
+      id: "99",
+      roles: [
+        {
+          name: "test",
+          id: "12",
+        }
+      ],
+    }
+  ]);
+    });
 });

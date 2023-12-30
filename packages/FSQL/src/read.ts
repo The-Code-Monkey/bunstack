@@ -13,6 +13,7 @@ class read<Data> {
   public whereColumn: string[];
   public whereOperator: string[];
   public whereValue: Array<string | number | boolean>;
+  public joins: Array<[string, string?]>;
   
   constructor(_this: DB) {
     this.table = _this.table;
@@ -21,6 +22,7 @@ class read<Data> {
     this.whereColumn = [];
     this.whereOperator = [];
     this.whereValue = [];
+    this.joins = [];
   }
 
   private checkCondition(fileValue: string | number | boolean, operator: string, value: string | number | boolean): boolean {
@@ -57,6 +59,11 @@ class read<Data> {
     }
     // if it doesn't, return null
     return null;
+  }
+
+  public join(table: string, column?: string) {
+    this.joins = [...this.joins, [table, column]];
+    return this;
   }
 
   public orderBy(column: string, order: 'ASC' | 'DESC') {
@@ -147,6 +154,29 @@ class read<Data> {
 
     if (this.limitNumber) {
       results = results.slice(0, this.limitNumber);
+    }
+
+    if (this.joins.length > 0) {
+      for (const index in this.joins) {
+        const join = this.joins[index];
+        const hasKey = !!join[1];
+
+        if (hasKey) {
+          const newResults: Data[] = [];
+          for (var i = 0; i < results.length; i++) {
+            const result = results[i];
+            const keyValue = result[join[1]];
+            const newReadInstance = new read({ table: join[0], folder: this.folder, database: this.database } as DB).where('id', '=', keyValue);
+            const value = await newReadInstance.get() as any;
+            console.log(value);
+            newResults.push({ ...result, [join[0]]: value } as Data);
+          }
+
+          results = newResults;
+        } else {
+          results = results.map(result => ({ ...result, [join[0]]: {} }));
+        }
+      }
     }
 
     if (this.columnsToGet[0] !== "*") {
