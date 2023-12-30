@@ -174,7 +174,16 @@ class read<Data> {
 
           results = newResults;
         } else {
-          results = results.map(result => ({ ...result, [join[0]]: {} }));
+          const newResults = Data[] = [];
+          for (let i = 0; i < results.length; i++) {
+            const result = results[i];
+            const newReadInstance = new read({ table: `${this.table}-${join[0]}`, folder: this.folder, database: this.database } as DB).where(`${this.table}Id`, '=', result.id);
+            const value = await newReadInstance.get() as any;
+            console.log(value);
+            newResults.push({ ...result, [join[0]]: value } as Data);
+          }
+          
+          results = newResults;
         }
       }
     }
