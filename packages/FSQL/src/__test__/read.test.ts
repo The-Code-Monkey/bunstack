@@ -53,7 +53,8 @@ describe('read', () => {
     });
 
     test('should join data to result', async () => {
-        const result = await readInstance.where('id', '=', '99').join('roles', 'roleId').get();
+        readInstance.where('id', '=', '99').join('roles', 'roleId');
+        const result = await readInstance.get();
 
         expect(result).toEqual(null);
     });
