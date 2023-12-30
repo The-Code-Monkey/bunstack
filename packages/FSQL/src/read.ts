@@ -163,7 +163,7 @@ class read<Data> {
 
         if (hasKey) {
           const newResults: Data[] = [];
-          for (var i = 0; i < results.length; i++) {
+          for (let i = 0; i < results.length; i++) {
             const result = results[i];
             const keyValue = result[join[1]];
             const newReadInstance = new read({ table: join[0], folder: this.folder, database: this.database } as DB).where('id', '=', keyValue);
