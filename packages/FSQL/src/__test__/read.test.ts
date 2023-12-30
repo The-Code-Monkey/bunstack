@@ -56,6 +56,19 @@ describe('read', () => {
         readInstance.where('id', '=', '99').join('roles', 'roleId');
         const result = await readInstance.get();
 
-        expect(result).toEqual(null);
+        expect(result).toEqual([
+    {
+      name: "John Doe 2",
+      age: 32,
+      roleId: "12",
+      id: "99",
+      roles: [
+        {
+          name: "test",
+          id: "12",
+        }
+      ],
+    }
+  ]);
     });
 });
