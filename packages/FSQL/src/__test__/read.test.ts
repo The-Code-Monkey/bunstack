@@ -48,6 +48,7 @@ describe('read', () => {
       name: "John Doe 2",
       age: 32,
       id: "99",
+            "roleId": "12"
         });
     });
 
