@@ -83,4 +83,11 @@ describe('create', () => {
         // Check if the function returns the correct error message
         expect(result).toEqual('2 already exists');
     });
+
+    test('should create a role', async () => {
+        db.create('roles').create({
+            _id: '12',
+            name: 'test'
+        });
+    });
 });
