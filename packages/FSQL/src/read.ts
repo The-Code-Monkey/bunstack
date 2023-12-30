@@ -162,13 +162,17 @@ class read<Data> {
         const hasKey = !!join[1];
 
         if (hasKey) {
-          results = results.map(async (result) => {
+          const newResults: Data[] = [];
+          for (var i = 0; i < results.length; i++) {
+            const result = results[i];
             const keyValue = result[join[1]];
             const newReadInstance = new read({ table: join[0], folder: this.folder, database: this.database } as DB).where('id', '=', keyValue);
             const value = await newReadInstance.get() as any;
             console.log(value);
-            return { ...result, [join[0]]: value } as Data
-          }) as Data[];
+            newResults.push({ ...result, [join[0]]: value } as Data);
+          }
+
+          results = newResults;
         } else {
           results = results.map(result => ({ ...result, [join[0]]: {} }));
         }
