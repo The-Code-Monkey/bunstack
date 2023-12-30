@@ -164,10 +164,11 @@ class read<Data> {
         if (hasKey) {
           results = results.map(async (result) => {
             const keyValue = result[join[1]];
-            const value = await (new read({ table: join[0], folder: this.folder, database: this.database } as DB).where('id', '=', keyValue).get()) as any;
+            const newReadInstance = new read({ table: join[0], folder: this.folder, database: this.database } as DB).where('id', '=', keyValue);
+            const value = await newReadInstance.get() as any;
             console.log(value);
-            return { ...result, [join[0]]: value }
-          });
+            return { ...result, [join[0]]: value } as Data
+          }) as Data[];
         } else {
           results = results.map(result => ({ ...result, [join[0]]: {} }));
         }
