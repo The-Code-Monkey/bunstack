@@ -162,7 +162,7 @@ class read<Data> {
         const hasKey = !!join[1];
 
         if (hasKey) {
-          results = results.map(result => {
+          results = results.map(async (result) => {
             const keyValue = result[join[1]];
             const value = await (new read({ table: join[0], folder: this.folder, database: this.database } as DB).where('id', '=', keyValue).get());
             console.log(value);
