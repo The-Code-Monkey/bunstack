@@ -7,11 +7,14 @@ describe('read', () => {
     let db: DB;
     let readInstance: read<object>;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         db = await new DB().init('testDB');
         readInstance = db.read('users');
-        readInstance.limit(10);
-    })
+    });
+
+    beforeEach(() => {
+        readInstance.limit(10)
+    });
 
     test('should return an array of data', async () => {
         const result = await readInstance.get();
@@ -70,8 +73,8 @@ describe('read', () => {
     });
 
     test('should join data to result via link table', async () => {
-        readInstance.where('id', '=', '24').join('roles');
-        const result = await readInstance.get();
+        const read = db.read('users').where('id', '=', '24').join('roles');
+        const result = await read.get();
 
         expect(result).toEqual(null);
     });
