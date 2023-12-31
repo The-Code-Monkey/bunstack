@@ -72,7 +72,7 @@ describe('read', () => {
   ]);
     });
 
-    test('should join data to result', async () => {
+    test('should join data to result via link table', async () => {
         readInstance.where('id', '=', '24').join('roles');
         const result = await readInstance.get();
 
