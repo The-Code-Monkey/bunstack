@@ -198,7 +198,7 @@ class read<Data extends Record<string, unknown>> {
           newResult[column] = result[column];
         }
 
-        newResults.push(newResult);
+        newResults.push(newResult as Data);
       }
 
       results = newResults;
