@@ -76,6 +76,19 @@ describe('read', () => {
         const read = db.read('users').where('id', '=', '24').join('roles');
         const result = await read.get();
 
-        expect(result).toEqual(null);
+        expect(result).toEqual([
+    {
+      name: "Jane Smith",
+      age: 25,
+      id: "24",
+      roles: [
+        {
+          usersId: "24",
+          rolesId: "12",
+          id: "24",
+        }
+      ]
+        }
+            ]);
     });
 });
