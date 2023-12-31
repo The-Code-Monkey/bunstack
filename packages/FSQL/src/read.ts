@@ -178,7 +178,7 @@ class read<Data extends Record<string, unknown>> {
           for (let i = 0; i < results.length; i++) {
             const result = results[i];
             console.log(result, join, this.table);
-            const newReadInstance = new DB().init(this.database, this.folder).read(`${this.table}-${join[0]}`);
+            const newReadInstance = await new DB().init(this.database, this.folder).read(`${this.table}-${join[0]}`);
               //.where(`${this.table}Id`, '=', result.id as string);
             const value = await newReadInstance.get();
             console.log('value', value);
