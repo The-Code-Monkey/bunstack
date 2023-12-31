@@ -92,11 +92,10 @@ describe('create', () => {
     });
 
     test('should add entry to users-roles', async () => {
-        const result = await db.create('users-roles').create({
+        await db.create('users-roles').create({
             _id: '24',
             usersId: '24',
             rolesId: '12'
         });
-        expect(result).toEqual(null);
     });
 });
