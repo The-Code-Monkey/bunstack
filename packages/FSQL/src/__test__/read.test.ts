@@ -7,12 +7,9 @@ describe('read', () => {
     let db: DB;
     let readInstance: read<object>;
 
-    beforeAll(async () => {
+    beforeEach(async () => {
         db = await new DB().init('testDB');
         readInstance = db.read('users');
-    });
-
-    beforeEach(() => {
         readInstance.limit(10);
     })
 
