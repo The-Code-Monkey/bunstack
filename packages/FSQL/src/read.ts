@@ -187,18 +187,23 @@ class read<Data extends Record<string, unknown>> {
       }
     }
 
-   // if (this.columnsToGet[0] !== "*") {
-   //   results = results.map(result => {
-   //     const newResult = {} as Data;
-        
-  //      for (const column in this.columnsToGet) {
-   //       const key = this.columnsToGet[column];
-   //       newResult[key] = result[key];
-   //     }
+    if (this.columnsToGet[0] != "*") {
+      const newResults : Data[] = [];
+      
+      for (let i = 0; i < results.length; i++) {
+        const result = results[i];
+        const newResult: Data = {};
 
-  //      return newResult;
-  //    })
-    // }
+        for (let j = 0; j < this.columnsToGet.length; j++) {
+          const column = this.columnsToGet[j];
+          newResult[column] = result[column];
+        }
+
+        newResults.push(newResult);
+      }
+
+      results = newResults;
+    }
 
     return results;
   }
