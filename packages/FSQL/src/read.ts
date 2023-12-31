@@ -137,7 +137,7 @@ class read<Data extends Record<string, unknown>> {
       }
     }
 
-    console.log(results.length);
+    console.log('post whrre', results.length);
 
     if (this.order) {
       results.sort((a, b) => {
@@ -154,7 +154,7 @@ class read<Data extends Record<string, unknown>> {
       }
     }
 
-    console.log(results.length);
+    console.log('post order', results.length);
 
     if (this.limitNumber) {
       results = results.slice(0, this.limitNumber);
