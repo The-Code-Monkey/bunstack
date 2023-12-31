@@ -106,6 +106,8 @@ class read<Data extends Record<string, unknown>> {
 
     const data = files.filter((file) => file !== 'schema.json');
 
+    console.log(data);
+
     if (this.columnsToGet[0] !== "*") {
       const invalidColumns = this.columnsToGet.some((column) => !schemaKeys.includes(column));
 
