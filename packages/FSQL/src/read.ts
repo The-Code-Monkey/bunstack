@@ -157,8 +157,8 @@ class read<Data extends Record<string, unknown>> {
     }
 
     if (this.joins.length > 0) {
-      for (const index in this.joins) {
-        const join = this.joins[index];
+      for (let j = 0; j < results.length; j++) {
+        const join = this.joins[j];
         const hasKey = !!join[1];
 
         if (hasKey) {
@@ -177,6 +177,7 @@ class read<Data extends Record<string, unknown>> {
           const newResults: Data[] = [];
           for (let i = 0; i < results.length; i++) {
             const result = results[i];
+            console.log(result, join, this.table);
             const newReadInstance = new read({ table: `${this.table}-${join[0]}`, folder: this.folder, database: this.database } as DB);
               //.where(`${this.table}Id`, '=', result.id as string);
             const value = await newReadInstance.get();
