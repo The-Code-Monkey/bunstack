@@ -137,8 +137,6 @@ class read<Data extends Record<string, unknown>> {
       }
     }
 
-    console.log('post whrre', this.table, results);
-
     if (this.order) {
       results.sort((a, b) => {
     const keyA = a[this.orderColumn],
@@ -153,8 +151,6 @@ class read<Data extends Record<string, unknown>> {
         results.reverse();
       }
     }
-
-    console.log('post order', this.table, results);
 
     if (this.limitNumber) {
       results = results.slice(0, this.limitNumber);
