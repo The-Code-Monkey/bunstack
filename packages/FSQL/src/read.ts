@@ -168,7 +168,6 @@ class read<Data extends Record<string, unknown>> {
             const keyValue = result[join[1]] as string;
             const newReadInstance = new read({ table: join[0], folder: this.folder, database: this.database } as DB).where('id', '=', keyValue);
             const value = await newReadInstance.get() as any;
-            console.log(value);
             newResults.push({ ...result, [join[0]]: value } as Data);
           }
 
