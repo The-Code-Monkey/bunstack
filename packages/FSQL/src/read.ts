@@ -139,6 +139,8 @@ class read<Data extends Record<string, unknown>> {
       }
     }
 
+    console.log(results.length);
+
     if (this.order) {
       results.sort((a, b) => {
     const keyA = a[this.orderColumn],
