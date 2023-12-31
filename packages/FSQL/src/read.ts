@@ -152,8 +152,6 @@ class read<Data extends Record<string, unknown>> {
       }
     }
 
-    console.log('results', results);
-
     if (this.limitNumber) {
       results = results.slice(0, this.limitNumber);
     }
