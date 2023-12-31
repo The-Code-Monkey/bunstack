@@ -71,4 +71,11 @@ describe('read', () => {
     }
   ]);
     });
+
+    test('should join data to result', async () => {
+        readInstance.where('id', '=', '24').join('roles');
+        const result = await readInstance.get();
+
+        expect(result).toEqual(null);
+    });
 });
