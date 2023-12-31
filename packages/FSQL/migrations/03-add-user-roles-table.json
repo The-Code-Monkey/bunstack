@@ -1,6 +1,9 @@
 {
   "name": "users-roles",
   "add": {
+    "id": {
+      "type": "string"
+    },
     "usersId": {
       "type": "string"
     },
