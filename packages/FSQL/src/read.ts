@@ -173,6 +173,7 @@ class read<Data extends Record<string, unknown>> {
 
           results = newResults;
         } else {
+          console.log('here', join);
           const newResults: Data[] = [];
           for (let i = 0; i < results.length; i++) {
             const result = results[i];
