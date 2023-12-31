@@ -85,9 +85,17 @@ describe('create', () => {
     });
 
     test('should create a role', async () => {
-        db.create('roles').create({
+        await db.create('roles').create({
             _id: '12',
             name: 'test'
+        });
+    });
+
+    test('should add entry to users-roles', async () => {
+        await db.create('users-roles').create({
+            _id: '24',
+            usersId: '24',
+            rolesId: '12'
         });
     });
 });
