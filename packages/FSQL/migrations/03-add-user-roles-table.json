@@ -1,10 +1,10 @@
 {
   "name": "users-roles",
   "add": {
-    "userId": {
+    "usersId": {
       "type": "string"
     },
-    "roleId": {
+    "rolesId": {
       "type": "Array:string"
     }
   }
