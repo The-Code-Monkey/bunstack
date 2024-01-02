@@ -49,7 +49,11 @@ describe('create', () => {
 
         const result = await createInstance.create(props);
 
-        expect(result).toEqual(props);
+        expect(result).toEqual({
+            id: '2',
+            name: 'John Doe',
+            age: 30,
+        });
     });
 
     test('should create multiple entries', async () => {
@@ -69,7 +73,19 @@ describe('create', () => {
 
         const result = await createInstance.create(props);
 
-        expect(result).toEqual(props);
+        expect(result).toEqual([
+            {
+                id: '99',
+                name: 'John Doe 2',
+                age: 32,
+                roleId: '12',
+            },
+            {
+                id: '24',
+                name: 'Jane Smith',
+                age: 25,
+            },
+        ]);
     });
 
     test('should return error if file exists', async () => {
