@@ -132,7 +132,7 @@ class read<Data extends Record<string, unknown>> {
   // Define an asynchronous private method named 'getFilteredData'. This method takes an array of strings as a parameter and returns a Promise that resolves to an array of Data objects.
   private async getFilteredData(data: string[]): Promise<Data[]> {
     // Initialize an empty array to store the results.
-    let results: Data[] = [];
+    const results: Data[] = [];
     // Loop over each file in the data array.
     for (const file of data) {
       // Check the file using the 'checkFile' method. This method should be defined in the same class and take a file name as a parameter.
@@ -149,7 +149,7 @@ class read<Data extends Record<string, unknown>> {
   // Define an asynchronous private method named 'getAllData'. This method takes an array of strings as a parameter and returns a Promise that resolves to an array of Data objects.
   private async getAllData(data: string[]): Promise<Data[]> {
     // Initialize an empty array to store the results.
-    let results: Data[] = [];
+    const results: Data[] = [];
     // Loop over each file in the data array.
     for (const file of data) {
       // Read the file and parse its content as JSON using the 'Bun.file().json()' method.
@@ -236,7 +236,7 @@ class read<Data extends Record<string, unknown>> {
     // Use the 'map' method to create a new array by transforming each 'result' in the 'results' array.
     return results.map(result => {
       // Initialize 'filteredResult' as an empty object that can have any of the properties of a Data object.
-      let filteredResult: Partial<Data> = {};
+      const filteredResult: Partial<Data> = {};
       // Iterate over each 'column' in 'this.columnsToGet'.
       for (const column of this.columnsToGet) {
         // If 'column' is a property of 'result'...
