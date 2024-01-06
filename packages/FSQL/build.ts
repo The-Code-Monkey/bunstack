@@ -3,7 +3,7 @@ import dts from "bun-plugin-dts";
 await Bun.build({
     entrypoints: ['./src/index.ts'],
     outdir: './dist/esm',
-    target: 'browser',
+    target: 'node',
     format: 'esm',
     plugins: [
         dts(),
