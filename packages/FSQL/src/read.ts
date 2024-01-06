@@ -1,5 +1,5 @@
 // Import the readdir function from the 'fs/promises' module in Node.js. This function is used to read the contents of a directory.
-import { readdir } from 'fs-extra';
+import fs from 'fs-extra';
 
 // Import the default export from the current directory, which is presumably the DB class.
 import DB from '.';
@@ -266,7 +266,7 @@ class read<Data extends Record<string, unknown>> {
     // Get the keys of the schema object.
     const schemaKeys = Object.keys(schema);
     // Read the directory that contains the table data and get the names of the files in it.
-    const files = await readdir(`${this.folder}/${this.database}/${this.table}`);
+    const files = await fs.readdir(`${this.folder}/${this.database}/${this.table}`);
     // Filter out the 'schema.json' file from the list of files.
     const data = files.filter((file) => file !== 'schema.json');
 
