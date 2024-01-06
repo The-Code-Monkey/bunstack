@@ -1,5 +1,5 @@
 // Import the readdir function from the 'fs/promises' module in Node.js. This function is used to read the contents of a directory.
-import fs from 'fs/promises';
+import { readdir } from 'fs-extra';
 
 // Import various functions from different files in the same directory.
 import { default as createFn } from './create';
@@ -58,7 +58,7 @@ class DB {
     // Check if 'lastMigration' is an array and if it is empty.
     else if (Array.isArray(lastMigration) && lastMigration.length === 0) {
       // If the condition is true, define a constant 'migrations' and set its value to the sorted list of files in the 'migrationsDir' directory.
-      const migrations = (await fs.readdir(migrationsDir)).sort();
+      const migrations = (await readdir(migrationsDir)).sort();
 
       // Iterate over each file in the 'migrations' array.
       for (const migration of migrations) {
