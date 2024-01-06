@@ -29,8 +29,9 @@ describe('read', () => {
 
     test('should return the data in the correct order when orderBy is applied', async () => {
         const withoutSort = await readInstance.get();
-        readInstance.orderBy('id', 'ASC');
+        readInstance.orderBy('age', 'ASC');
         const result = await readInstance.get();
+        console.log(withoutSort, result);
         expect(result).not.toEqual(withoutSort);
     });
 
