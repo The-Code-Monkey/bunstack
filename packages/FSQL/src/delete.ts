@@ -1,5 +1,5 @@
 // Import the unlink function from the 'fs/promises' module in Node.js. This function is used to delete files.
-import fs from "fs-extra";
+import fs from "node:fs/promises";
 
 // Import the default export from the current directory, which is presumably the DB class.
 import DB from '.';
