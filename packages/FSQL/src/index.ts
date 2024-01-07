@@ -1,5 +1,5 @@
 // Import the readdir function from the 'fs/promises' module in Node.js. This function is used to read the contents of a directory.
-import fs from 'fs-extra';
+import fs from 'node:fs/promises';
 
 // Import various functions from different files in the same directory.
 import { default as createFn } from './create';
